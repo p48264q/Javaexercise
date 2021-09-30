@@ -13,6 +13,7 @@ public class PopSort {
                 int num1 = sc.nextInt();
                 num[i] = num1;
             }
+            sc.close();
         }
         for (int i = 1; i < 8; i++) {
             for (int i1 = 0; i1 < 8 - i; i1++) {
