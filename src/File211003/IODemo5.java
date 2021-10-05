@@ -4,6 +4,7 @@ import javax.swing.text.Document;
 import java.io.*;
 
 //实现单层文件夹的复制
+//运行前提：main函数的file1文件夹需要预先存在
 /*
 * 遇到的问题有：路径拼接过程中错误拼接，将两个绝对路径拼接
 * 字符串方法路径拼接过程中忘记“\\”造成路径异常
@@ -16,7 +17,9 @@ public class IODemo5 {
         File file1 = new File("C:\\Users\\sixgod\\Desktop\\11");
         File file2 = new File("C:\\Users\\sixgod\\Desktop\\new11");
         if(!file2.exists()){//file2不存在时创建文件夹
-            file2.mkdirs();
+            boolean b = file2.mkdirs();
+            if(!b)
+                System.out.println("创建文件夹失败");
         }
         CopyFolder(file1,file2);
     }
@@ -39,14 +42,15 @@ public class IODemo5 {
         //file是源文件的全路径名称
         //file2是目标文件的上层文件夹名称
         FileInputStream fileInputStream = new FileInputStream(file);
-        String str = file2.getAbsolutePath() +"\\"+ file.getName();
+        //String str = file2.getAbsolutePath() +"\\"+ file.getName();
         //拼接路径时忘了\\
+        File str = new File(file2.getAbsolutePath(),file.getName());
         FileOutputStream fileOutputStream = new FileOutputStream(str);
 
         byte[] b = new byte[10];
         int len = 0;
         while((len = fileInputStream.read(b))!= -1){
-            fileOutputStream.write(b);
+            fileOutputStream.write(b,0,len);
             fileOutputStream.flush();
         }
         fileInputStream.close();
