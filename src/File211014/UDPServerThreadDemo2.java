@@ -12,8 +12,10 @@ public class UDPServerThreadDemo2 {
             DatagramPacket packet = new DatagramPacket(bytes,0,bytes.length);
             socket.receive(packet);
             byte[] bytes1 = packet.getData();
+            int l = packet.getLength();
             //String s = new String(bytes1,0, packet.getLength());
-            String s = bytes1.toString();
+            //String s = bytes1.toString();
+            String s = new String(bytes1,0,l);
             if(s.equals("886")){
                 System.out.println(s);
                 break;
