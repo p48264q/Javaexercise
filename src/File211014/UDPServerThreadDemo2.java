@@ -14,7 +14,7 @@ public class UDPServerThreadDemo2 {
             byte[] bytes1 = packet.getData();
             int l = packet.getLength();
             //String s = new String(bytes1,0, packet.getLength());
-            //String s = bytes1.toString();
+            //String s = bytes1.toString();字节数组不能以toString方法转字符串
             String s = new String(bytes1,0,l);
             if(s.equals("886")){
                 System.out.println(s);
